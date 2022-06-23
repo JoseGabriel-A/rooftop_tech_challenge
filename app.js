@@ -50,19 +50,19 @@ async function check(block_data, token) {
 }
 
 
-function get_block(token) { // getting block data
-    console.log("Getting block....")
-    const base_URL = process.env.BLOCK_URL;
-    const user_token = token.token;
-    console.log(base_URL.concat(user_token));
-    fetch(base_URL.concat(user_token)).then((res) => {
-        return res.json();
-    }).then((json) => {
-        const block_data = json;
-        console.log(block_data);
-        check(block_data, token);
-    }).catch(error => console.log(error))
+async function get_block(token) { // getting block data
+    try {
+        const base_URL = process.env.BLOCK_URL;
+        const user_token = token.token;
+        var url = base_URL.concat(user_token);
+        console.log("Getting block.... from", url)
+        var block_data = await get_request(url);
+        return block_data;
+    } catch (e) {
+        console.log(e);
+    }
 }
+
 
 
 async function get_token() { // getting the token
@@ -70,11 +70,22 @@ async function get_token() { // getting the token
         const url = process.env.TOKEN_URL;
         console.log("Getting token.... from ", url);
         var token = await get_request(url);
-        console.log(token);
+        return token;
     } catch (e) {
         console.log(e);
     }
 }
 
+async function main() {
+    try {
+        const token = await get_token();
+        console.log(token);
+        const block_data = await get_block(token);
+        console.log('Block data: ');
+        console.log(block_data);
+    } catch (e) {
+        console.log(e);
+    }
+}
 
-get_token();
+main();

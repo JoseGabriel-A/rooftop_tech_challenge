@@ -23,7 +23,6 @@ module.exports = {
     },
     async get_request(url) {
         try {
-            console.log(url);
             const res = await fetch(url);
             return res.json();
         } catch (e) {
