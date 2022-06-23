@@ -7,7 +7,7 @@ require('dotenv').config();
 
 var sorted_data = [];
 
-const { sort_data } = require('./requests');
+const { sort_data, get_request } = require('./requests');
 
 
 async function check(block_data, token) {
@@ -65,15 +65,15 @@ function get_block(token) { // getting block data
 }
 
 
-function get_token() { // getting the token
-    console.log("Getting token....")
-    fetch(process.env.TOKEN_URL).then((res) => {
-        return res.json();
-    }).then((json) => {
-        const token = json;
+async function get_token() { // getting the token
+    try {
+        const url = process.env.TOKEN_URL;
+        console.log("Getting token.... from ", url);
+        var token = await get_request(url);
         console.log(token);
-        get_block(token);
-    }).catch(error => console.log(error))
+    } catch (e) {
+        console.log(e);
+    }
 }
 
 

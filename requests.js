@@ -20,5 +20,14 @@ module.exports = {
         } catch (e) {
             console.log(e);
         }
+    },
+    async get_request(url) {
+        try {
+            console.log(url);
+            const res = await fetch(url);
+            return res.json();
+        } catch (e) {
+            console.log(e);
+        }
     }
 }
