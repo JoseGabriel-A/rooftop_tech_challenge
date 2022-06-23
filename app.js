@@ -9,19 +9,6 @@ require('dotenv').config();
 
 const { sort_data, get_request } = require('./requests');
 
-const final_data =
-    [
-        'LluIROktoM7rqgSQ8judG7H59FCBJAc5HffAFyBGUedpSAsw7G8FnZi5vAzB2PwPKHZdYM3eyP5TVNxw34KXWSKCxm5g9MTXvFYp',
-        'PgVzqM24P6Oa0wp4KxDBGVUriErVZ7YCMhNIl2sDasCp2aCPATATJCjiSz0tgy6W7nzOfDJSS1uaEJzGIuTCud6rItEhRSWrKmf9',
-        'liO2707A2tmFDXHMCFki4IIIQnhdMUGHMS77kzpvKbBDWJ2lUeoNsswgf4BPv7uNoZVGoBtciRwe9nyHttMcv5Gm38ttgE0h3Cqo',
-        'fON2rn7YEifFGryKmoMvVfpilbzevYBe2X0CvNSPzrVfopvs8UTuP6ykLrOc8SfNas8QX7Wvg44uti3dhdi001UssjlGqwWuimiv',
-        '9snRwVunw3jzUqORGNwx0phesEDMs338CUTTXbmEnNXI16E13jzpDXyYtvjw6J8IMvpp712Vzj5W3zhtht0UBeGWIffogewO2BOq',
-        'Lb6EnjDJvFNbvPFEUBfksyYqvgLY6n67YUzAZOCLIg5IoRA4g12I48zkQkorQnlx6d6c58M9GzisM3cqNIXpUjWDRWQyFZZjeejb',
-        'sjsxmvVT9bvZT9wmtzhvu3AVb1kv6pEfg4EWZVdr4QKIw6kLHUaD8brc44hrNQUtYzOABxLXqFZH1Xfx9O7GX1KsGBN7AmZeQArU',
-        '56XR2DS5TCIrMOAjAJqt0DoUH1S49PBD3ef4q6hOz81V5zIgjMwc87FuUWqIwbFgHe7R3WPfpZgauhbFuw55ZHYSzS30kse6an6a',
-        'FKzs8cbpEXD5qNf0FBDmxaU3mhUyTQDp38H2aH6m13XLQyuJPF4murcglFAMPqnfOvOzRaCbZCtQnGIBl1z1uKjyDMDYOgcCTp45'
-    ];
-
 
 async function check(block_data, token) {
     try {
@@ -97,7 +84,6 @@ async function test(sorted_data, token) { // testing the sorted data
             "encoded": test_data
         };
 
-        console.log(data);
         console.log("Testing sorted block.... ")
         var res = await sort_data(data, token)
         return res;
@@ -115,10 +101,10 @@ async function main() {
         const block_data = await get_block(token);
         console.log('Block data: ');
         console.log(block_data);
-        const sorted_data = await check(block_data, token);
+        const final_data = await check(block_data, token);
         console.log('Sorted Block data');
-        console.log(sorted_data);
-        const result = await test(sorted_data, token);
+        console.log(final_data);
+        const result = await test(final_data, token);
         console.log('Final result of test: ');
         console.log(result);
 
