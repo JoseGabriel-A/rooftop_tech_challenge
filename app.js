@@ -77,6 +77,23 @@ async function get_token() { // getting the token
     }
 }
 
+async function test(sorted_data, token) { // testing the sorted data
+    try {
+        test_data = sorted_data.join('');
+        var data = {
+            "encoded": test_data
+        };
+
+        console.log("Testing sorted block.... ")
+        var res = await sort_data(data, token)
+        return res;
+    } catch (e) {
+        console.log(e);
+    }
+
+}
+
+
 async function main() {
     try {
         const token = await get_token();
@@ -84,12 +101,17 @@ async function main() {
         const block_data = await get_block(token);
         console.log('Block data: ');
         console.log(block_data);
-        const sorted_data = await check(block_data, token);
+        const final_data = await check(block_data, token);
         console.log('Sorted Block data');
-        console.log(sorted_data);
+        console.log(final_data);
+        const result = await test(final_data, token);
+        console.log('Final result of test: ');
+        console.log(result);
+
     } catch (e) {
         console.log(e);
     }
 }
 
 main();
+
