@@ -5,13 +5,15 @@ require('dotenv').config();
 
 
 
-var sorted_data = [];
+
 
 const { sort_data, get_request } = require('./requests');
 
 
 async function check(block_data, token) {
     try {
+        console.log("Sorting data blocks....")
+        var sorted_data = [];
         var i;
         var z = 0
         var j = 1;
@@ -39,8 +41,7 @@ async function check(block_data, token) {
 
 
         }
-        console.log('sorted vector');
-        console.log(sorted_data);
+        return sorted_data;
 
 
     } catch (e) {
@@ -83,6 +84,9 @@ async function main() {
         const block_data = await get_block(token);
         console.log('Block data: ');
         console.log(block_data);
+        const sorted_data = await check(block_data, token);
+        console.log('Sorted Block data');
+        console.log(sorted_data);
     } catch (e) {
         console.log(e);
     }
