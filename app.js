@@ -10,7 +10,7 @@ var sorted_data = [];
 const { sort_data } = require('./requests');
 
 
-async function sorting_data(block_data, token) {
+async function check(block_data, token) {
     var i;
     var z = 0
     var j = 1;
@@ -47,7 +47,7 @@ async function sorting_data(block_data, token) {
 
 function get_block(token) { // getting block data
     console.log("Getting block....")
-    const base_URL = process.env.URL;
+    const base_URL = process.env.BLOCK_URL;
     const user_token = token.token;
     console.log(base_URL.concat(user_token));
     fetch(base_URL.concat(user_token)).then((res) => {
@@ -55,7 +55,7 @@ function get_block(token) { // getting block data
     }).then((json) => {
         const block_data = json;
         console.log(block_data);
-        sorting_data(block_data, token)
+        check(block_data, token);
     }).catch(error => console.log(error))
 }
 
