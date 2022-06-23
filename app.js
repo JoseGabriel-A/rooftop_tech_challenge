@@ -11,36 +11,41 @@ const { sort_data } = require('./requests');
 
 
 async function check(block_data, token) {
-    var i;
-    var z = 0
-    var j = 1;
-    sorted_data[0] = block_data.data[0];
-    for (i = 0; i < (block_data.length / block_data.chunkSize); i++) {
+    try {
+        var i;
+        var z = 0
+        var j = 1;
+        sorted_data[0] = block_data.data[0];
+        for (i = 0; i < (block_data.length / block_data.chunkSize); i++) {
 
-        if (i === z) { i++; } // this is  to avoid compare the same string
-        var data = {
-            "blocks": [
-                block_data.data[z],
-                block_data.data[i]
-            ]
-        };
-        console.log(data);
-        console.log('Loop is equal :' + i);
-        var value = await sort_data(data, token);
-        if (value.message == true) {
-            sorted_data[j] = block_data.data[i];
-            z = i;
-            i = 1;
-            j++;
+            if (i === z) { i++; } // this is  to avoid compare the same string
+            var data = {
+                "blocks": [
+                    block_data.data[z],
+                    block_data.data[i]
+                ]
+            };
+            console.log(data);
+            console.log('Loop is equal :' + i);
+            var value = await sort_data(data, token);
+            if (value.message == true) {
+                sorted_data[j] = block_data.data[i];
+                z = i;
+                i = 1;
+                j++;
+
+            }
+            console.log(value);
+
 
         }
-        console.log(value);
+        console.log('sorted vector');
+        console.log(sorted_data);
 
 
+    } catch (e) {
+        console.log(e);
     }
-    console.log('sorted vector');
-    console.log(sorted_data);
-
 
 }
 
